@@ -108,6 +108,8 @@ Because we are not trying to emulate any known machine, the definition of the P6
 
 - Sprites !
 
+- Extra framebuffers, with BLIT commands to fast copy between them
+
 - Memory bank access to framebuffer
 
 - Memory bank access to the ROM code, so you can write self-modifying code
