@@ -3,6 +3,10 @@ The P64 computer console
 
 ![potato](potato.jpg)
 
+A fyne app  
+http://fyne.io/fyne
+
+
 ## Install it
 
 ```
@@ -19,6 +23,7 @@ potato64 filename
 
 eg - `potato64 ~/go/src/github.com/potato-arcade/p64/ROM/BOUNCY.BAS` to get up and running
 
+![pong](pong.gif)
 
 Run the Basic Interpreter to test some code
 ```
