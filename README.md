@@ -33,8 +33,29 @@ The Potato console contains the following components :
 - The Memory Banks
 - Video Controller
 - The IO controller
+- The Audio Controller
 
 ## ROM Cartridges
 
 ## Roll your own ROM
+
+
+## TODO
+
+- Overlay graphical image of the console, like Andy's Beeb emulator
+
+- Bootup static to look like real static
+
+- Graphics primitives mapped to PotatoBASIC
+    - LINE x,y,x2,y2,style
+    - CIRCLE x,y,r
+    - TEXT x,y,string
+    - RECT x,y,x2,y2
+    - FILLBOX x,y,x2,y2
+
+- Sprites !
+
+- Memory bank access to framebuffer
+
+- Memory bank access to code
 
