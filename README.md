@@ -1,8 +1,9 @@
-# p64
+# Model P-64 Programmable Graphics Console
 
-The P64 computer console 
+Introducing the Potato-64 emulator, written in 100% Go
 
-A programmable computerized graphics console, written in Go
+(with a bit of OpenGL C code under the hood)
+
 
 ![potato](potato.jpg)
 
