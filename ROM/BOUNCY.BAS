@@ -1,22 +1,24 @@
 REM Bouncy Ball Demo
 
 REM Init game state and store in RAM banks
-LET X = RND 64
-LET Y = RND 64
-LET DX = 1
-LET DY = 1
-POKE 1, X
-POKE 2, Y
+POKE 1, RND 64
+POKE 2, RND 64
+POKE 3, 1
+POKE 4, -1
+END
+
+.INTR KEYDOWN
+LET DX = PEEK 3
+LET DY = PEEK 4
+IF KEY = "Left" THEN DX = DX - 0.5
+IF KEY = "Right" THEN DX = DX + 0.5
+IF KEY = "Up" THEN DY = DY - 0.5
+IF KEY = "Down" THEN DY = DY + 0.5
 POKE 3, DX
 POKE 4, DY
 END
 
-.INTR KEYDOWN
-PRINT "KEY DOWN", KEY
-END
-
 .INTR KEYUP
-PRINT "KEY UP", KEY
 END
 
 .INTR VSYNC

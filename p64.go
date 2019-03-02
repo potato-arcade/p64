@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"fyne.io/fyne"
+	"fyne.io/fyne/driver/desktop"
 	"fyne.io/fyne/widget"
 	"github.com/skx/gobasic/object"
 )
@@ -24,6 +25,22 @@ func New(app fyne.App) *P64 {
 	p.On()
 	window.SetContent(p)
 	window.Show()
+	window.Canvas().(desktop.Canvas).SetOnKeyDown(func(ev *fyne.KeyEvent) {
+		switch string(ev.Name) {
+		case "Escape":
+			p.Reboot()
+		default:
+			p.interrupt("KEYDOWN", string(ev.Name))
+		}
+	})
+	window.Canvas().(desktop.Canvas).SetOnKeyUp(func(ev *fyne.KeyEvent) {
+		switch string(ev.Name) {
+		case "Escape":
+		default:
+			p.interrupt("KEYUP", string(ev.Name))
+		}
+	})
+
 	return p
 }
 

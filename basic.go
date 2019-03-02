@@ -43,6 +43,15 @@ func (p *P64) registerFunctions(e *eval.Interpreter) {
 		return blankObj
 	})
 
+	e.RegisterBuiltin("LINE", 4, func(env interface{}, args []object.Object) object.Object {
+		x := int(args[0].(*object.NumberObject).Value)
+		y := int(args[1].(*object.NumberObject).Value)
+		x2 := int(args[2].(*object.NumberObject).Value)
+		y2 := int(args[3].(*object.NumberObject).Value)
+		p.frameBuffer.Line(x, y, x2, y2)
+		return blankObj
+	})
+
 	e.RegisterBuiltin("DEBUG", 0, func(env interface{}, args []object.Object) object.Object {
 		fmt.Println("DEBUG Memory Banks")
 		spew.Dump(env)
@@ -117,7 +126,7 @@ func (p *P64) compileInterrupt(intr string) {
 	}
 }
 
-func (p *P64) interrupt(what string, data int) {
+func (p *P64) interrupt(what string, data interface{}) {
 	handler, ok := p.code[what]
 	if !ok {
 		fmt.Println("No interrupt for", what, data)
@@ -133,7 +142,12 @@ func (p *P64) interrupt(what string, data int) {
 	p.registerFunctions(e)
 
 	// Set the KEY variable
-	e.SetVariable("KEY", &object.NumberObject{Value: float64(data)})
+	switch what {
+	case "VSYNC":
+		e.SetVariable("TICK", &object.NumberObject{Value: float64(data.(int))})
+	case "KEYDOWN", "KEYUP":
+		e.SetVariable("KEY", &object.StringObject{Value: data.(string)})
+	}
 
 	// Run the interrupt code
 	if err := e.Run(); err != nil {

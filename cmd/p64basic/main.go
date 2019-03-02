@@ -126,6 +126,14 @@ func main() {
 		return blankObj
 	})
 
+	e.RegisterBuiltin("LINE", 4, func(env interface{}, args []object.Object) object.Object {
+		x := int(args[0].(*object.NumberObject).Value)
+		y := int(args[1].(*object.NumberObject).Value)
+		x2 := int(args[2].(*object.NumberObject).Value)
+		y2 := int(args[3].(*object.NumberObject).Value)
+		fmt.Printf("LINE %v,%v -> %v,%v\n", x, y, x2, y2)
+		return blankObj
+	})
 	//
 	// Enable debugging if we should.
 	//
