@@ -32,7 +32,7 @@ func (p *P64) registerFunctions(e *eval.Interpreter) {
 
 	e.RegisterBuiltin("DEBUG", 0, func(env interface{}, args []object.Object) object.Object {
 		fmt.Println("DEBUG Memory Banks")
-		spew.Dump(p.ram, p.code)
+		spew.Dump(p.ram)
 		return blankObj
 	})
 }
