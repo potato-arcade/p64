@@ -1,12 +1,13 @@
 package p64
 
 import (
-	"fmt"
 	"math/rand"
 	"time"
 
 	"fyne.io/fyne"
 	"fyne.io/fyne/widget"
+	"github.com/skx/gobasic/eval"
+	"github.com/skx/gobasic/object"
 )
 
 const hz = 24
@@ -17,6 +18,8 @@ func New(app fyne.App) *P64 {
 	p := &P64{
 		Hz:          hz,
 		frameBuffer: newFramebuffer(64, 64),
+		ram:         make(map[int]object.Object),
+		code:        make(map[string]*eval.Interpreter),
 	}
 	p.run()
 	p.On()
@@ -33,6 +36,10 @@ type P64 struct {
 	position    fyne.Position
 	hidden      bool
 	frameBuffer *frameBuffer
+	ram         map[int]object.Object
+	romFile     string
+	src         string
+	code        map[string]*eval.Interpreter
 }
 
 func (p *P64) On() {
@@ -46,6 +53,12 @@ func (p *P64) Off() {
 
 func (p *P64) Reboot() {
 	p.Booting = rand.Intn(hz) + hz
+	p.ram = make(map[int]object.Object)
+	p.code = make(map[string]*eval.Interpreter)
+}
+
+func (p *P64) InsertROM(f string) {
+	p.romFile = f
 }
 
 func (p *P64) run() {
@@ -55,17 +68,18 @@ func (p *P64) run() {
 		for {
 			select {
 			case <-tick.C:
-				fmt.Print(".")
 				// Powered Off
 				if !p.Power {
 					p.frameBuffer.Clear()
 				}
 				if p.Power && p.Booting > 0 {
-					p.frameBuffer.Rand()
+					if rand.Intn(10) == 1 {
+						p.frameBuffer.Rand()
+					}
 					p.Booting--
 					if p.Booting < 1 {
 						p.frameBuffer.Clear()
-						// we are now powered on and ready to run
+						p.LoadROM()
 					}
 					widget.Refresh(p)
 				}

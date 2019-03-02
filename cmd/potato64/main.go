@@ -1,16 +1,23 @@
 package main
 
 import (
-	"time"
+	"fmt"
+	"os"
 
 	"fyne.io/fyne/app"
 	"github.com/potato-arcade/p64"
-	"github.com/steveoc64/memdebug"
 )
 
 func main() {
 	app := app.New()
 	p := p64.New(app)
-	memdebug.Print(time.Now(), "got p", p)
-	app.Run()
+	switch len(os.Args) {
+	case 1:
+		app.Run()
+	case 2:
+		p.InsertROM(os.Args[1])
+		app.Run()
+	default:
+		fmt.Println("USAGE:", os.Args[0], "ROM-Filename")
+	}
 }

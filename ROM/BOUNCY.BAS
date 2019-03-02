@@ -1,0 +1,24 @@
+REM Bouncy Ball Demo
+
+REM Init game state and store in RAM banks
+LET X = 36
+LET Y = 36
+LET DX = 1
+LET DY = 1
+POKE 1, X
+POKE 2, Y
+POKE 3, DX
+POKE 4, DY
+END
+
+.INTR KEYDOWN
+PRINT "KEY DOWN", KEY$
+END
+
+.INTR KEYUP
+PRINT "KEY UP", KEY$
+END
+
+.INTR VSYNC
+PRINT "VSYNC"
+END

@@ -1,21 +1,44 @@
 REM Tennis Game
-REM INTR 1,1000
-REM INTR 2,500
-REM INTR 3,600
 
-10 LET BL = 36
-20 LET BR = 36
-30 PRINT "Bats at locations", BL, BR, "\n"
-40 LET BX = 32
-50 LET BY = 36
-60 PRINT "Ball at", BX, BY,"\n"
-70 END
+REM Initialize game state, and store in system RAM banks
+LET BL = 36
+LET BR = 36
+PRINT "Bats at locations", BL, BR, "\n"
+LET BX = 32
+LET BY = 36
+PRINT "Ball at", BX, BY,"\n"
 
-500 PRINT "KEY DOWN", $KEY
-510 RETURN
+PRINT "Store to RAM", BL, BR, BX, BY, "\n"
+POKE 100, BL
+POKE 101, BR
+POKE 102, BX
+POKE 103, BY
 
-600 PRINT "KEY UP", $KEY
-610 RETURN
+PRINT "Load from RAM", "\n"
+LET AL = PEEK 100
+LET AR = PEEK 101
+LET AX = PEEK 102
+LET AY = PEEK 103
+LET ABATS = PEEK 200
+PRINT "Got", AL, AR, AX, AY, "\n"
+PRINT "Bats", ABATS, "\n"
+DEBUG
 
-1000 PRINT "REPAINT"
-1100 RETURN
+DIM a(2,2)
+LET a[1,1] = "Muh String"
+POKE 400, a
+LET NEWA = PEEK 400
+PRINT "New thing is\n", NEWA[1,1], "\n"
+END
+
+.INTR KEYDOWN
+PRINT "KEY DOWN", KEY
+END
+
+.INTR KEYUP
+PRINT "KEY UP", KEY
+END
+
+.INTR VSYNC
+PRINT "VSYNC"
+END

@@ -1,7 +1,6 @@
 package p64
 
 import (
-	"fmt"
 	"image"
 	"image/color"
 
@@ -39,8 +38,6 @@ func (r *renderer) getImage(w, h int) *image.RGBA {
 }
 
 func (r *renderer) frame(w, h int) image.Image {
-	fmt.Print("_")
-	fmt.Println("frame", w, h)
 	img := r.getImage(w, h)
 	bx := int(float64(w) / float64(frameWidth))
 	by := int(float64(h) / float64(frameHeight))
