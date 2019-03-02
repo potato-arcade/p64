@@ -2,6 +2,7 @@ package p64
 
 import (
 	"math/rand"
+	"sync"
 	"time"
 
 	"fyne.io/fyne"
@@ -52,6 +53,7 @@ type P64 struct {
 	position    fyne.Position
 	hidden      bool
 	frameBuffer *frameBuffer
+	ramMutex    sync.RWMutex
 	ram         map[int]object.Object
 	romFile     string
 	src         string

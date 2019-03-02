@@ -26,7 +26,9 @@ func (p *P64) registerFunctions(e *eval.Interpreter) {
 
 	e.RegisterBuiltin("POKE", 2, func(env interface{}, args []object.Object) object.Object {
 		key := int(args[0].(*object.NumberObject).Value)
+		p.ramMutex.Lock()
 		p.ram[key] = args[1]
+		p.ramMutex.Unlock()
 		return blankObj
 	})
 
