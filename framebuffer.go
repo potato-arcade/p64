@@ -15,8 +15,7 @@ type frameBuffer struct {
 }
 
 func newFramebuffer(w, h int) *frameBuffer {
-	f := &frameBuffer{}
-	return f
+	return &frameBuffer{}
 }
 
 func (f *frameBuffer) Rand() {

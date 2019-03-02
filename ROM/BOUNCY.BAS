@@ -1,8 +1,8 @@
 REM Bouncy Ball Demo
 
 REM Init game state and store in RAM banks
-LET X = 36
-LET Y = 36
+LET X = RND 64
+LET Y = RND 64
 LET DX = 1
 LET DY = 1
 POKE 1, X
