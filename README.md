@@ -84,7 +84,7 @@ https://github.com/fyne-io/fyne
 
 https://github.com/go-gl/glfw
 
-## Further reading - some vids you might like, to get in the mood for P64
+## Further reading - some vids you might like, to get you in the mood for P64 coding
 
 https://www.youtube.com/watch?v=XNRx5hc4gYc
 
