@@ -71,10 +71,6 @@ func (p *P64) LoadROM() {
 }
 
 func (p *P64) compileInterrupt(intr string) {
-
-	fmt.Println("-------------------------------")
-	fmt.Println("looking for", intr)
-
 	if i := strings.Index(p.src, ".INTR "+intr); i != -1 {
 		code := p.src[i+6:]
 		fmt.Println("got one at", i, code)
@@ -92,6 +88,5 @@ func (p *P64) compileInterrupt(intr string) {
 				return
 			}
 		}
-
 	}
 }
