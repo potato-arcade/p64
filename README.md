@@ -29,15 +29,13 @@ But like shooting black and white film in the digital age, these extremely limit
 
 You can write complete, and compelling games in an lunch break ....  but only if you think creatively, and code around the limitations of the hardware.  Getting your code to work well needs to you to think about the code from the machine's point of view.
 
-![bw](bw/bw4.jpg)
 
-Its literally BASIC, so its easy to get started with and easy to learn. But deceptively hard to master.
+Its literally BASIC, so its easy to get started with and easy to learn. But deceptively hard to master. 
 
 ![bw](bw/bw6.jpg)
 
 Like a photographer armed with an old film camera, you have the same challenge of creating something compelling that jumps off the page. Its about the image, not the equipment.
 
-![bw](bw/bw7.jpg)
 
 Can YOU think up an addictive game that fits within the limitations of the hardware ?
 
@@ -65,6 +63,7 @@ Run the Basic Interpreter to test some code
 p64basic filename
 ```
 
+![bw](bw/bw7.jpg)
 
 ## The Machine
 
@@ -77,7 +76,9 @@ The Potato console contains the following components :
 - The IO controller
 - The Audio Controller
 
-Because we are not trying to emulate any known machine, the definition of the P64 itself is entirely software driven - so we can expand the capabilities of the P64 to release new models all the time by adding more virtual hardware.
+Because we are not trying to emulate any known machine, the definition of the P64 itself is entirely software driven - so we can give it additional concepts, features, bugs and limitations that do not even exist in any real hardware.
+
+![bw](bw/bw4.jpg)
 
 ## ROM Cartridges
 
