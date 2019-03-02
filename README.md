@@ -25,11 +25,11 @@ The capablities of the machine are deliberately limited
 
 But like shooting black and white film in the digital age, these extremely limited constraints really force you to open up your creative side.
 
-![bw](p64/bw/bw3.jpg)
+![bw](bw/bw3.jpg)
 
 You can write complete, and compelling games in an lunch break ....  but only if you think creatively, and code around the limitations of the hardware.  Getting your code to work well needs to you to think about the code from the machine's point of view.
 
-![bw](/bw/bw4.jpg)
+![bw](bw/bw4.jpg)
 
 Its literally BASIC, so its easy to get started with and easy to learn. But deceptively hard to master.
 
@@ -37,7 +37,7 @@ Its literally BASIC, so its easy to get started with and easy to learn. But dece
 
 Like a photographer armed with an old film camera, you have the same challenge of creating something compelling that jumps off the page. Its about the image, not the equipment.
 
-![bw](p64/bw/bw7.jpg)
+![bw](bw/bw7.jpg)
 
 Can YOU think up an addictive game that fits within the limitations of the hardware ?
 
