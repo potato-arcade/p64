@@ -1,6 +1,8 @@
 package p64
 
-import "math/rand"
+import (
+	"math/rand"
+)
 
 const (
 	frameWidth  = 64
@@ -31,8 +33,8 @@ func (f *frameBuffer) Clear() {
 
 func (f *frameBuffer) Set(x, y, value int) {
 	f.data[y*frameWidth+x] = value
-
 }
+
 func (f *frameBuffer) At(x, y int) int {
 	return f.data[y*frameWidth+x]
 }

@@ -113,8 +113,16 @@ func main() {
 		return blankObj
 	})
 
-	e.RegisterBuiltin(".INTR", 1, func(env interface{}, args []object.Object) object.Object {
-		fmt.Println("interrupt:", args[0].(*object.StringObject).Value)
+	e.RegisterBuiltin("CLEAR", 0, func(env interface{}, args []object.Object) object.Object {
+		fmt.Println("CLEAR")
+		return blankObj
+	})
+
+	e.RegisterBuiltin("SET", 3, func(env interface{}, args []object.Object) object.Object {
+		x := int(args[0].(*object.NumberObject).Value)
+		y := int(args[1].(*object.NumberObject).Value)
+		v := int(args[2].(*object.NumberObject).Value)
+		fmt.Printf("SET %v,%v -> %v\n", x, y, v)
 		return blankObj
 	})
 

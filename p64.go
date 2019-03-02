@@ -6,7 +6,6 @@ import (
 
 	"fyne.io/fyne"
 	"fyne.io/fyne/widget"
-	"github.com/skx/gobasic/eval"
 	"github.com/skx/gobasic/object"
 )
 
@@ -19,7 +18,7 @@ func New(app fyne.App) *P64 {
 		Hz:          hz,
 		frameBuffer: newFramebuffer(64, 64),
 		ram:         make(map[int]object.Object),
-		code:        make(map[string]*eval.Interpreter),
+		code:        make(map[string]string),
 	}
 	p.run()
 	p.On()
@@ -39,7 +38,7 @@ type P64 struct {
 	ram         map[int]object.Object
 	romFile     string
 	src         string
-	code        map[string]*eval.Interpreter
+	code        map[string]string
 }
 
 func (p *P64) On() {
@@ -54,7 +53,7 @@ func (p *P64) Off() {
 func (p *P64) Reboot() {
 	p.Booting = rand.Intn(hz) + hz
 	p.ram = make(map[int]object.Object)
-	p.code = make(map[string]*eval.Interpreter)
+	p.code = make(map[string]string)
 }
 
 func (p *P64) InsertROM(f string) {
@@ -64,6 +63,7 @@ func (p *P64) InsertROM(f string) {
 func (p *P64) run() {
 	go func() {
 		tick := time.NewTicker(time.Second / hz)
+		t1 := 0
 
 		for {
 			select {
@@ -89,7 +89,8 @@ func (p *P64) run() {
 				}
 
 				// It lives !
-				p.Interrupt("VSYNC", nil)
+				p.interrupt("VSYNC", t1)
+				t1++
 				widget.Refresh(p)
 			}
 		}

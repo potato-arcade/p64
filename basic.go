@@ -4,13 +4,11 @@ import (
 	"fmt"
 	"io/ioutil"
 	"strings"
-	"time"
 
 	"github.com/davecgh/go-spew/spew"
 	"github.com/skx/gobasic/eval"
 	"github.com/skx/gobasic/object"
 	"github.com/skx/gobasic/tokenizer"
-	"github.com/steveoc64/memdebug"
 )
 
 func (p *P64) registerFunctions(e *eval.Interpreter) {
@@ -32,8 +30,22 @@ func (p *P64) registerFunctions(e *eval.Interpreter) {
 		return blankObj
 	})
 
+	e.RegisterBuiltin("CLEAR", 0, func(env interface{}, args []object.Object) object.Object {
+		p.frameBuffer.Clear()
+		return blankObj
+	})
+
+	e.RegisterBuiltin("SET", 3, func(env interface{}, args []object.Object) object.Object {
+		x := int(args[0].(*object.NumberObject).Value)
+		y := int(args[1].(*object.NumberObject).Value)
+		v := int(args[2].(*object.NumberObject).Value)
+		p.frameBuffer.Set(x, y, v)
+		return blankObj
+	})
+
 	e.RegisterBuiltin("DEBUG", 0, func(env interface{}, args []object.Object) object.Object {
 		fmt.Println("DEBUG Memory Banks")
+		spew.Dump(env)
 		spew.Dump(p.ram)
 		for k, v := range p.code {
 			fmt.Println("Interrupt Handler:",
@@ -65,7 +77,6 @@ func (p *P64) LoadROM() {
 		return
 	}
 	p.registerFunctions(e)
-	p.code["INIT"] = e
 
 	// Now we need to split the code into sections
 	fmt.Println("Now need to split into sections and create multiple interpreters", p.src)
@@ -74,7 +85,7 @@ func (p *P64) LoadROM() {
 	p.compileInterrupt("VSYNC")
 
 	// Run Init Code
-	if err := p.code["INIT"].Run(); err != nil {
+	if err := e.Run(); err != nil {
 		fmt.Println("ERROR ROM EXEC INIT BOOT:", err)
 		return
 	}
@@ -91,14 +102,16 @@ func (p *P64) compileInterrupt(intr string) {
 				if endcode != -1 {
 					code = code[:endcode]
 				}
-				t := tokenizer.New(code)
-				e, err := eval.New(t)
-				if err != nil {
-					fmt.Println("ERROR ROM IMPORT:", err)
-					return
+				if false {
+					t := tokenizer.New(code)
+					e, err := eval.New(t)
+					if err != nil {
+						fmt.Println("ERROR ROM IMPORT:", err)
+						return
+					}
+					p.registerFunctions(e)
 				}
-				p.registerFunctions(e)
-				p.code[intr] = e
+				p.code[intr] = code
 				return
 			}
 		}
@@ -109,18 +122,24 @@ func (p *P64) interrupt(what string, data int) {
 	handler, ok := p.code[what]
 	if !ok {
 		fmt.Println("No interrupt for", what, data)
+		spew.Dump(p.code)
 		return
 	}
+	t := tokenizer.New(handler)
+	e, err := eval.New(t)
+	if err != nil {
+		fmt.Println("ERROR ROM INTR:", err)
+		//delete(p.code, what)
+	}
+	p.registerFunctions(e)
 
-	t1 := time.Now()
 	// Set the KEY variable
-	handler.SetVariable("KEY", &object.NumberObject{Value: data})
+	e.SetVariable("KEY", &object.NumberObject{Value: float64(data)})
 
 	// Run the interrupt code
-	if err := handler.Run(); err != nil {
+	if err := e.Run(); err != nil {
 		fmt.Println("ERROR ROM EXEC INTR:", err)
+		//delete(p.code, what)
 		return
 	}
-	memdebug.Print(t1, "interrupt", what, data)
-
 }
