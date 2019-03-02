@@ -79,7 +79,7 @@ The Potato console contains the following components :
 
 Because we are not trying to emulate any known machine, the definition of the P64 itself is entirely software driven - so we can give it additional concepts, features, bugs and limitations that do not even exist in any real hardware.
 
-![bw](bw/bw4.jpg)
+![bw](bw/bw8.jpg)
 
 ## ROM Cartridges
 
