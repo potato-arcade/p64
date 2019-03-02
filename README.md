@@ -21,11 +21,11 @@ The capablities of the machine are deliberately limited
 - the onboard memory store (64 'banks' of memory to store variables in)
 - and of course ... the colour palette of the display  (Monochrome).
 
-!(p64/bw/bw2.jpg)
+![bw](p64/bw/bw2.jpg)
 
 But like shooting black and white film in the digital age, these extremely limited constraints really force you to open up your creative side.
 
-!(bw/bw3.jpg)
+![bw](p64/bw/bw3.jpg)
 
 You can write complete, and compelling games in an lunch break ....  but only if you think creatively, and code around the limitations of the hardware.  Getting your code to work well needs to you to think about the code from the machine's point of view.
 
