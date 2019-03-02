@@ -62,7 +62,6 @@ REM Move the ball
 310 Y = Y + DY
 
 REM Top and lower Line
-
 320 FOR I = 0 TO 63
 330  SET I,7,1
 340  SET I,63,1
@@ -105,14 +104,7 @@ REM Left and Right Bat
 1320 DY = -1 * DY
 1330 RETURN
 
-2000 PRIN	e.RegisterBuiltin("LINE", 4, func(env interface{}, args []object.Object) object.Object {
-		x := int(args[0].(*object.NumberObject).Value)
-		y := int(args[1].(*object.NumberObject).Value)
-		x2 := int(args[2].(*object.NumberObject).Value)
-		y2 := int(args[3].(*object.NumberObject).Value)
-		p.frameBuffer.Line(x, y, x2, y2)
-		return blankObj
-	})T
+2000 PRINT
 2020 POKE 1, X
 2030 POKE 2, Y
 2040 POKE 3, DX
