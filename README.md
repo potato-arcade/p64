@@ -46,6 +46,8 @@ The Potato console contains the following components :
 - The IO controller
 - The Audio Controller
 
+Because we are not trying to emulate any known machine, the definition of the P64 itself is entirely software driven - so we can expand the capabilities of the P64 to release new models all the time by adding more virtual hardware.
+
 ## ROM Cartridges
 
 ## Roll your own ROM
@@ -84,12 +86,23 @@ https://github.com/fyne-io/fyne
 
 https://github.com/go-gl/glfw
 
+https://gitlab.com/rastersoft/fbzx
+
+https://github.com/remogatto/gospeccy
+
+https://github.com/ichikaway/goNES/
+
+
 ## Further reading - some vids you might like, to get you in the mood for P64 coding
 
+PONG - First documented Video Ping-Pong game - 1969
 https://www.youtube.com/watch?v=XNRx5hc4gYc
 
-https://www.youtube.com/watch?v=k4BCyfpP38Q
 
+c64 peeks and pokes
+https://www.youtube.com/watch?v=k4BCyfpP38Q
 https://www.youtube.com/watch?v=zAndQn1p5L8
 
+
+Incredible story of how they recovered the Apollo mission control software from the dumpster
 https://www.youtube.com/watch?v=WquhaobDqLU
