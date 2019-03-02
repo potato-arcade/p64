@@ -130,13 +130,16 @@ https://github.com/ichikaway/goNES/
 ## Further reading - some vids you might like, to get you in the mood for P64 coding
 
 PONG - First documented Video Ping-Pong game - 1969
+
 https://www.youtube.com/watch?v=XNRx5hc4gYc
 
 
 c64 peeks and pokes
+
 https://www.youtube.com/watch?v=k4BCyfpP38Q
 https://www.youtube.com/watch?v=zAndQn1p5L8
 
 
 Incredible story of how they recovered the Apollo mission control software from the dumpster
+
 https://www.youtube.com/watch?v=WquhaobDqLU
