@@ -71,7 +71,10 @@ func (p *P64) run() {
 				// Powered Off
 				if !p.Power {
 					p.frameBuffer.Clear()
+					continue
 				}
+
+				// Booting up and loading ROM cartrige
 				if p.Power && p.Booting > 0 {
 					if rand.Intn(10) == 1 {
 						p.frameBuffer.Rand()
@@ -82,7 +85,12 @@ func (p *P64) run() {
 						p.LoadROM()
 					}
 					widget.Refresh(p)
+					continue
 				}
+
+				// It lives !
+				p.Interrupt("VSYNC", nil)
+				widget.Refresh(p)
 			}
 		}
 	}()

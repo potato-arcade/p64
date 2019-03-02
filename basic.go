@@ -4,11 +4,13 @@ import (
 	"fmt"
 	"io/ioutil"
 	"strings"
+	"time"
 
 	"github.com/davecgh/go-spew/spew"
 	"github.com/skx/gobasic/eval"
 	"github.com/skx/gobasic/object"
 	"github.com/skx/gobasic/tokenizer"
+	"github.com/steveoc64/memdebug"
 )
 
 func (p *P64) registerFunctions(e *eval.Interpreter) {
@@ -33,6 +35,14 @@ func (p *P64) registerFunctions(e *eval.Interpreter) {
 	e.RegisterBuiltin("DEBUG", 0, func(env interface{}, args []object.Object) object.Object {
 		fmt.Println("DEBUG Memory Banks")
 		spew.Dump(p.ram)
+		for k, v := range p.code {
+			fmt.Println("Interrupt Handler:",
+				k,
+				"\n-------------------------\n",
+				v,
+				"\n-------------------------\n",
+			)
+		}
 		return blankObj
 	})
 }
@@ -63,7 +73,7 @@ func (p *P64) LoadROM() {
 	p.compileInterrupt("KEYUP")
 	p.compileInterrupt("VSYNC")
 
-	// Run t
+	// Run Init Code
 	if err := p.code["INIT"].Run(); err != nil {
 		fmt.Println("ERROR ROM EXEC INIT BOOT:", err)
 		return
@@ -73,11 +83,15 @@ func (p *P64) LoadROM() {
 func (p *P64) compileInterrupt(intr string) {
 	if i := strings.Index(p.src, ".INTR "+intr); i != -1 {
 		code := p.src[i+6:]
-		fmt.Println("got one at", i, code)
 		ii := strings.Index(code, "\n")
 		if ii != -1 {
 			if code[:ii] == intr {
-				t := tokenizer.New(code[ii:])
+				code = code[ii:]
+				endcode := strings.Index(code, "END\n")
+				if endcode != -1 {
+					code = code[:endcode]
+				}
+				t := tokenizer.New(code)
 				e, err := eval.New(t)
 				if err != nil {
 					fmt.Println("ERROR ROM IMPORT:", err)
@@ -89,4 +103,24 @@ func (p *P64) compileInterrupt(intr string) {
 			}
 		}
 	}
+}
+
+func (p *P64) interrupt(what string, data int) {
+	handler, ok := p.code[what]
+	if !ok {
+		fmt.Println("No interrupt for", what, data)
+		return
+	}
+
+	t1 := time.Now()
+	// Set the KEY variable
+	handler.SetVariable("KEY", &object.NumberObject{Value: data})
+
+	// Run the interrupt code
+	if err := handler.Run(); err != nil {
+		fmt.Println("ERROR ROM EXEC INTR:", err)
+		return
+	}
+	memdebug.Print(t1, "interrupt", what, data)
+
 }
