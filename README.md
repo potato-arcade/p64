@@ -21,7 +21,7 @@ The capablities of the machine are deliberately limited
 - the onboard memory store (64 'banks' of memory to store variables in)
 - and of course ... the colour palette of the display  (Monochrome).
 
-!(bw/bw2.jpg)
+!(p64/bw/bw2.jpg)
 
 But like shooting black and white film in the digital age, these extremely limited constraints really force you to open up your creative side.
 
