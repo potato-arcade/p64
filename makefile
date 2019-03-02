@@ -1,13 +1,15 @@
-all: build
+all: install
 
-build:
-	go build ./...
-	ls -ltra
+install: 
+	go install ./... 
 
 test:
 	go vet ./...
 	golint ./...
 	go test ./...
 
-run: test build
-	./potato64
+run: 
+	$(HOME)/go/bin/potato64
+
+generate:
+	fyne bundle -package p64 -name font kongtext.ttf > bundle.go
