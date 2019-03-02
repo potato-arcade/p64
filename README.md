@@ -23,7 +23,7 @@ The capablities of the machine are deliberately limited
 
 ![bw](bw/bw2.jpg)
 
-But like shooting black and white film in the digital age, these extremely limited constraints really force you to open up your creative side.
+But like shooting black and white film in the digital age, these extremely limited constraints really force you to open up your creative side. To use the machine to tell a story.
 
 ![bw](bw/bw3.jpg)
 
