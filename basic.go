@@ -79,7 +79,6 @@ func (p *P64) LoadROM() {
 	p.registerFunctions(e)
 
 	// Now we need to split the code into sections
-	fmt.Println("Now need to split into sections and create multiple interpreters", p.src)
 	p.compileInterrupt("KEYDOWN")
 	p.compileInterrupt("KEYUP")
 	p.compileInterrupt("VSYNC")

@@ -51,7 +51,7 @@ func (p *P64) Off() {
 }
 
 func (p *P64) Reboot() {
-	p.Booting = rand.Intn(hz) + hz
+	p.Booting = 3*rand.Intn(hz) + hz
 	p.ram = make(map[int]object.Object)
 	p.code = make(map[string]string)
 }
