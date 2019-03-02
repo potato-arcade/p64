@@ -57,6 +57,12 @@ The Potato console contains the following components :
 
 - Bootup static to look like real static
 
+- Extra Video Modes
+
+- Text Mode
+
+- Colors !!  Colored border
+
 - Graphics primitives mapped to PotatoBASIC
     - LINE x,y,x2,y2,style
     - CIRCLE x,y,r
@@ -70,12 +76,20 @@ The Potato console contains the following components :
 
 - Memory bank access to code
 
-## See also
-
-https://www.youtube.com/watch?v=XNRx5hc4gYc
+## If you like this, you should like these repos too
 
 https://github.com/skx/gobasic
 
 https://github.com/fyne-io/fyne
 
 https://github.com/go-gl/glfw
+
+## Further reading - some vids you might like, to get in the mood for P64
+
+https://www.youtube.com/watch?v=XNRx5hc4gYc
+
+https://www.youtube.com/watch?v=k4BCyfpP38Q
+
+https://www.youtube.com/watch?v=zAndQn1p5L8
+
+https://www.youtube.com/watch?v=WquhaobDqLU
