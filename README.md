@@ -1,5 +1,6 @@
 # p64
 The P64 computer console 
+A programmable gaming console, written in Go
 
 ![potato](potato.jpg)
 
