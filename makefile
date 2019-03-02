@@ -1,0 +1,13 @@
+all: build
+
+build:
+	go build ./...
+	ls -ltra
+
+test:
+	go vet ./...
+	golint ./...
+	go test ./...
+
+run: test build
+	./potato64
