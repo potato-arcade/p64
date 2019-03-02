@@ -110,7 +110,7 @@ Because we are not trying to emulate any known machine, the definition of the P6
 
 - Memory bank access to framebuffer
 
-- Memory bank access to code
+- Memory bank access to the ROM code, so you can write self-modifying code
 
 ## If you like this, you should like these repos too
 
