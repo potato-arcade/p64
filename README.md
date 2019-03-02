@@ -70,3 +70,12 @@ The Potato console contains the following components :
 
 - Memory bank access to code
 
+## See also
+
+https://www.youtube.com/watch?v=XNRx5hc4gYc
+
+https://github.com/skx/gobasic
+
+https://github.com/fyne-io/fyne
+
+https://github.com/go-gl/glfw
