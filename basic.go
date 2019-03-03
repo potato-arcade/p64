@@ -17,6 +17,10 @@ func (p *P64) registerFunctions(e *eval.Interpreter) {
 
 	e.RegisterBuiltin("PEEK", 1, func(env interface{}, args []object.Object) object.Object {
 		key := int(args[0].(*object.NumberObject).Value)
+		if key < 1 || key > 64 {
+			// invalid memory bank
+			return blankObj
+		}
 		value, ok := p.ram[key]
 		if !ok {
 			return blankObj
@@ -26,6 +30,10 @@ func (p *P64) registerFunctions(e *eval.Interpreter) {
 
 	e.RegisterBuiltin("POKE", 2, func(env interface{}, args []object.Object) object.Object {
 		key := int(args[0].(*object.NumberObject).Value)
+		if key < 1 || key > 64 {
+			// invalid memory bank
+			return blankObj
+		}
 		p.ramMutex.Lock()
 		p.ram[key] = args[1]
 		p.ramMutex.Unlock()

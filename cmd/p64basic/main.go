@@ -90,6 +90,10 @@ func main() {
 	// Register some builtins
 	e.RegisterBuiltin("PEEK", 1, func(env interface{}, args []object.Object) object.Object {
 		key := int(args[0].(*object.NumberObject).Value)
+		if key < 1 || key > 64 {
+			// invalid memory bank
+			return blankObj
+		}
 		fmt.Printf("PEEK <- %v ", key)
 		value, ok := ram[key]
 		if !ok {
@@ -102,6 +106,10 @@ func main() {
 
 	e.RegisterBuiltin("POKE", 2, func(env interface{}, args []object.Object) object.Object {
 		key := int(args[0].(*object.NumberObject).Value)
+		if key < 1 || key > 64 {
+			// invalid memory bank
+			return blankObj
+		}
 		fmt.Printf("POKE %v -> %v\n", args[1], key)
 		ram[key] = args[1]
 		return blankObj

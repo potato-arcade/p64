@@ -81,6 +81,14 @@ Because we are not trying to emulate any known machine, the definition of the P6
 
 ![bw](bw/bw8.jpg)
 
+### The CPU
+
+### The ROM Cartridge Slot
+### The Memory Banks
+### Video Controller
+- The IO controller
+- The Audio Controller
+
 ## ROM Cartridges
 
 ## Roll your own ROM

@@ -1,6 +1,7 @@
 package p64
 
 import (
+	"fmt"
 	"image"
 	"image/color"
 
@@ -32,6 +33,7 @@ type renderer struct {
 
 func (r *renderer) getImage(w, h int) *image.RGBA {
 	if r.img == nil || r.img.Bounds().Size().X != w || r.img.Bounds().Size().Y != h {
+		fmt.Print(".")
 		r.img = image.NewRGBA(image.Rect(0, 0, w, h))
 	}
 	return r.img
