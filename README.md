@@ -195,11 +195,9 @@ This model of video controller executes a framebuffer read at a rate of 24Hz (ev
 
 After that, it generates a VSYNC interrupt, which the CPU then picks up and uses to call the code to start building the next frame.
 
-```
-Vertical Sync Interrupt (VSYNC)
-
-This interrupt is generated when the video controller has completed one clean pass of outputting a frame to the video output.
-```
+>Vertical Sync Interrupt (VSYNC)
+>
+>This interrupt is generated when the video controller has completed one clean pass of outputting a frame to the video output.
 
 Writing code to be executed on VSYNC :
 - Use the `.INTR VSYNC` keyword in your ROM Cartridge code to add a routine to be executed on VSYNC.
