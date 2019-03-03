@@ -235,7 +235,8 @@ PRINT
 END
 ```
 
-Video Memory Banks of interest.  (TODO - Work in progress, not available yet)
+Video Memory Banks of interest [Classified] 
+
 - 33 The Video Framebuffer, being an array of 4096 Numbers, arranged consequetively as 1st Row, 2nd Row ... 64th Row. 
 - 34,35,36 - 2nd, 3rd, 4th Alternate Framebuffers 
 - 37 Foreground Color, string RGBA
@@ -245,6 +246,8 @@ Video Memory Banks of interest.  (TODO - Work in progress, not available yet)
 - 41 Hue Modification Register 
 - 46 Refresh Rate Register, number, can be used to select the framebuffer refresh rate
 - 47 Image Effect Register, number, bitmask to select framebuffer post processing modes
+
+In the current release, access to these advanced hardware features are still classified, and locked down due to NDAs with powerful Government entities. Will open up these features as time, and our legal department permit.
 
 Future additional BASIC functions for graphics primitives (TODO)
 
@@ -404,11 +407,15 @@ eg :
 
 ## If you like this, you should like these repos too
 
-https://github.com/skx/gobasic
+https://github.com/skx/gobasic   ** Awesome BASIC Compiler in Go **
 
-https://github.com/fyne-io/fyne
+https://github.com/fyne-io/fyne ** Awesome, Modern Native GUI framework for Go ** 
 
-https://github.com/go-gl/glfw
+https://github.com/anthonynsimon/bild ** Awesome image hacking additions in Go **
+
+https://github.com/go-gl/glfw ** Awesome Go bindings for awesome OpenGL framework **
+
+More emulation in Go
 
 https://gitlab.com/rastersoft/fbzx
 
@@ -416,7 +423,6 @@ https://github.com/remogatto/gospeccy
 
 https://github.com/ichikaway/goNES/
 
-https://github.com/anthonynsimon/bild
 
 
 ## Further reading - some vids you might like, to get you in the mood for P64 coding
