@@ -83,7 +83,7 @@ Because we are not trying to emulate any known machine, the definition of the P6
 
 ![bw](bw/bw8.jpg)
 
-### The CPU, model P64-101
+### The CPU, model P-88064
 
 The CPU is a single core machine that executes BASIC as its core instruction set, with some minor extensions.
 
