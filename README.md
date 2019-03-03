@@ -299,15 +299,13 @@ https://github.com/ichikaway/goNES/
 
 PONG - First documented Video Ping-Pong game - 1969
 
-https://www.youtube.com/watch?v=XNRx5hc4gYc
-
+[![pong](http://img.youtube.com/vi/XNRx5hc4gYc/0.jpg)](http://www.youtube.com/watch?v=XNRx5hc4gYc)
 
 c64 peeks and pokes
 
-https://www.youtube.com/watch?v=k4BCyfpP38Q
-https://www.youtube.com/watch?v=zAndQn1p5L8
-
+[![peek](http://img.youtube.com/vi/k4BCyfpP38Q/0.jpg)](http://www.youtube.com/watch?v=k4BCyfpP38Q)
+[![poke](http://img.youtube.com/vi/zAndQn1p5L8/0.jpg)](http://www.youtube.com/watch?v=zAndQn1p5L8)
 
 Incredible story of how they recovered the Apollo mission control software from the dumpster
 
-https://www.youtube.com/watch?v=WquhaobDqLU
+[![apollo](http://img.youtube.com/vi/WquhaobDqLU/0.jpg)](http://www.youtube.com/watch?v=WquhaobDqLU)
