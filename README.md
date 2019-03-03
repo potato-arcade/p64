@@ -393,7 +393,7 @@ eg :
 
 ## TODO
 
-- Overlay graphical image of the console, like Andy's Beeb emulator
+- Overlay graphical image of the console, like Andy's Beeb emulator https://github.com/andydotxyz/beebui
 
 - Bootup static to look like real static
 
@@ -413,6 +413,8 @@ eg :
 
 ## If you like this, you should like these repos too
 
+https://github.com/andydotxyz/beebui  ** Parallel development of adding gobasic into fyne **
+
 https://github.com/skx/gobasic   ** Awesome BASIC Compiler in Go **
 
 https://github.com/fyne-io/fyne ** Awesome, Modern Native GUI framework for Go ** 
@@ -421,7 +423,9 @@ https://github.com/anthonynsimon/bild ** Awesome image hacking additions in Go *
 
 https://github.com/go-gl/glfw ** Awesome Go bindings for awesome OpenGL framework **
 
+
 More emulation in Go
+
 
 https://gitlab.com/rastersoft/fbzx
 
