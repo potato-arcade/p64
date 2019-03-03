@@ -351,6 +351,8 @@ Use one of the existing ROM Cartridges as a base, copy it, change it, and observ
 
 Then ... fine tune your idea.
 
+You can also use the standalone `p64basic` command (which is installed as part of this package) to test out PotatoBASIC ROM files without the GUI frontend.  Very useful for testing and executing PotatoBASIC server code that you might be running in the cloud, and can only access via ssh.
+
 ## Bugs !
 
 The BASIC compiler is a bit buggy, sometimes.
