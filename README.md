@@ -7,7 +7,7 @@ Introducing the Potato-64 emulator, written in 100% Go
 _Being something of a light hearted revolt against modern software development norms, web development, and the cult of the "FullStack" developer._
 
 
-![potato](potato.jpg =240px)
+![potato](potato.jpg =240x)
 
 A fyne app  
 http://fyne.io/fyne
@@ -25,7 +25,7 @@ The capablities of the machine are deliberately limited
 - the onboard memory store (64 'banks' of memory to store variables in)
 - and of course ... the colour palette of the display  (Monochrome).
 
-![bw](bw/bw2.jpg =240px)
+![bw](bw/bw2.jpg =240x)
 
 But like shooting black and white film in the digital age, these extremely limited constraints really force you to open up your creative side. To use the machine to tell a story.
 
@@ -35,7 +35,7 @@ You can write complete, and compelling games in an lunch break ....  but only if
 
 Its literally BASIC, so its easy to get started with and easy to learn. But deceptively hard to master. 
 
-![bw](bw/bw6.jpg =240px)
+![bw](bw/bw6.jpg =240x)
 
 Like a photographer armed with an old film camera, you have the same challenge of creating something compelling that jumps off the page. Its about the image, not the equipment.
 
@@ -66,7 +66,7 @@ p64basic filename
 ```
 
 
-![bw](bw/bw7.jpg =240px)
+![bw](bw/bw7.jpg =240x)
 
 ## The Machine
 
@@ -81,7 +81,7 @@ The Potato console contains the following components :
 
 Because we are not trying to emulate any known machine, the definition of the P64 itself is entirely software driven - so we can give it additional concepts, features, bugs and limitations that do not even exist in any real hardware.
 
-![bw](bw/bw8.jpg =240px)
+![bw](bw/bw8.jpg =240x)
 
 ### The CPU, model P64-101
 
@@ -253,7 +253,7 @@ Video Memory Banks of interest.  (TODO - Work in progress, not available yet)
 
 ## Roll your own ROM
 
-![bw](bw/bw3.jpg =240px)
+![bw](bw/bw3.jpg =240x)
 
 ## TODO
 
