@@ -1,6 +1,6 @@
 # Model P-64 Programmable Graphics Console
 
-Introducing the Potato-64 emulator, written in 100% Go
+Introducing the Potato-64 emulator, written in 100% pure Go
 
 A fyne app  http://fyne.io/fyne
 
@@ -8,11 +8,9 @@ A fyne app  http://fyne.io/fyne
 
 _Being something of a light hearted revolt against modern coding norms, web development, and the cult of the "FullStack" developer._
 
-_This little toy is a weekend project to get back into the heart and soul of the machine._
-
-
 ![potato](potato.jpg)
 
+_This little toy is a weekend project to get into the heart and soul of the machine._
 
 ## What is it, and why should I care ?
 
@@ -27,7 +25,7 @@ The capablities of the machine are deliberately limited
 - the onboard memory store (64 'banks' of memory to store variables in)
 - and of course ... the colour palette of the display  (Monochrome).
 
-![bw](bw/bw2.jpg =240x)
+![bw](bw/bw2.jpg)
 
 But like shooting black and white film in the digital age, these extremely limited constraints really force you to open up your creative side. To use the machine to tell a story.
 
@@ -37,7 +35,7 @@ You can write complete, and compelling games in an lunch break ....  but only if
 
 Its literally BASIC, so its easy to get started with and easy to learn. But deceptively hard to master. 
 
-![bw](bw/bw6.jpg =240x)
+![bw](bw/bw6.jpg)
 
 Like a photographer armed with an old film camera, you have the same challenge of creating something compelling that jumps off the page. Its about the image, not the equipment.
 
@@ -83,7 +81,7 @@ The Potato console contains the following components :
 
 Because we are not trying to emulate any known machine, the definition of the P64 itself is entirely software driven - so we can give it additional concepts, features, bugs and limitations that do not even exist in any real hardware.
 
-![bw](bw/bw8.jpg =240x)
+![bw](bw/bw8.jpg)
 
 ### The CPU, model P64-101
 
