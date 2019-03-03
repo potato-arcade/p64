@@ -115,13 +115,13 @@ An Object can be :
 - An array of Numbers
 
 How to use the memory banks in code - store a value to a memory bank.
-```
+```basic
 10 LET X = 10
 20 POKE 1, X
 ```
 
 How to use the memory banks in code - retrieve a value from a memory bank.
-```
+```basic
 10 X = PEEK 1
 20 PRINT "The value of X is", X
 ```
@@ -165,18 +165,74 @@ Audio Registers
 - 63 3rd Sprite Register
 - 64 4th Sprite Register
 
+Debug intruction to view the whole available memory bank internals :
+```
+10 DEBUG
+```
+
+This will dump the entire contents of the memory banks to the stdout, back on the host system.  Useful for getting things sorted out.
+
 ### Video Controller, model EnVideon-4K/24
 
 The Video Controller is fixed frequency framebuffer device with a 4K capability.   (Thats 4K pixels in total)
 
+Machine instructions to write to the framebuffer, and manipulate pixel in the 64x64 grid.
+```basic
+REM Clear the framebuffer to the background color
+10 CLEAR
+
+REM Set a pixel at a location
+20 SET X,Y,1
+
+REM Clear a pixel at a location
+30 SET X,Y,0
+
+REM Read a pixel at a location
+40 LET PX = AT(X,Y)
+```
+
 This model of video controller executes a framebuffer read at a rate of 24Hz (every 41ms or so), at which point it draws the current framebuffer onto the video output as an array of 64x64 dots.
 
-After that, it generates a VSYNC interrupt, which the CPU then picks up and uses to call the code to start building the next frame.M
+After that, it generates a VSYNC interrupt, which the CPU then picks up and uses to call the code to start building the next frame.
 
 ```
 Vertical Sync Interrupt (VSYNC)
 
 This interrupt is generated when the video controller has completed one clean pass of outputting a frame to the video output.
+```
+
+Writing code to be executed on VSYNC :
+- Use the `.INTR VSYNC` keyword in your ROM Cartridge code to add a routine to be executed on VSYNC.
+- End your video routine with the `END` keyword. Be super careful where you put this, as you cannot GOSUB to functions outside of this block.
+- Use `PEEK` to retrieve state data from the Memory Banks. Program variables used in other code are temporary and have a life cycle of 1 interrupt routine. So they cannot be accessed in different interrupt control code, or between different calls to the same interrupt handler ...  so you NEED to use the Memory Banks to share state.
+- Use `POKE` to save state data back to the Memory Banks before exiting your VSYNC interrupt handler.
+
+Example code for a complete VSYNC interrupt handler :
+```basic
+.INTR VSYNC
+CLEAR
+LET X = PEEK 1
+LET Y = PEEK 2
+LET DX = PEEK 3
+LET DY = PEEK 4
+X = X + DX
+Y = Y + DY
+PRINT
+
+100 GOSUB 1000
+110 GOTO 2000
+
+1000 IF X > 0 THEN RETURN
+1010 X = 1
+1020 DX = 1
+1030 RETURN
+
+2000 SET X,Y,1
+2010 POKE 1, X
+2020 POKE 2, Y
+2030 POKE 3, DX
+2040 POKE 4, DY
+END
 ```
 
 Video Memory Banks of interest.  (TODO - Work in progress, not available yet)

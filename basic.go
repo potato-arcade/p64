@@ -53,6 +53,12 @@ func (p *P64) registerFunctions(e *eval.Interpreter) {
 		return blankObj
 	})
 
+	e.RegisterBuiltin("AT", 2, func(env interface{}, args []object.Object) object.Object {
+		x := int(args[0].(*object.NumberObject).Value)
+		y := int(args[1].(*object.NumberObject).Value)
+		return &object.NumberObject{Value: p.frameBuffer.At(x, y)}
+	})
+
 	e.RegisterBuiltin("LINE", 4, func(env interface{}, args []object.Object) object.Object {
 		x := int(args[0].(*object.NumberObject).Value)
 		y := int(args[1].(*object.NumberObject).Value)

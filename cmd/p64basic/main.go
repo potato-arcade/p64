@@ -126,6 +126,13 @@ func main() {
 		return blankObj
 	})
 
+	e.RegisterBuiltin("AT", 2, func(env interface{}, args []object.Object) object.Object {
+		x := int(args[0].(*object.NumberObject).Value)
+		y := int(args[1].(*object.NumberObject).Value)
+		fmt.Printf("AT %v,%v -> %v\n", x, y, 0)
+		return blankObj
+	})
+
 	e.RegisterBuiltin("SET", 3, func(env interface{}, args []object.Object) object.Object {
 		x := int(args[0].(*object.NumberObject).Value)
 		y := int(args[1].(*object.NumberObject).Value)
