@@ -58,6 +58,7 @@ type P64 struct {
 	romFile     string
 	src         string
 	code        map[string]string
+	renderer    *renderer
 }
 
 func (p *P64) On() {
@@ -95,13 +96,15 @@ func (p *P64) run() {
 
 				// Booting up and loading ROM cartrige
 				if p.Power && p.Booting > 0 {
-					if rand.Intn(10) == 1 {
-						p.frameBuffer.Rand()
-					}
+					p.renderer.Static(true)
+					//if rand.Intn(10) == 1 {
+					//p.frameBuffer.Rand()
+					//}
 					p.Booting--
 					if p.Booting < 1 {
 						p.frameBuffer.Clear()
 						p.LoadROM()
+						p.renderer.Static(false)
 					}
 					widget.Refresh(p)
 					continue

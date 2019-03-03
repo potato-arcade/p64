@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"image"
 	"image/color"
+	"math/rand"
 
 	"fyne.io/fyne"
 	"fyne.io/fyne/canvas"
@@ -17,6 +18,7 @@ func (p *P64) CreateRenderer() fyne.WidgetRenderer {
 	renderer.render = render
 	renderer.objects = []fyne.CanvasObject{render}
 	renderer.ApplyTheme()
+	p.renderer = renderer
 
 	return renderer
 }
@@ -29,6 +31,22 @@ type renderer struct {
 	frameBuffer *frameBuffer
 	size        fyne.Size
 	img         *image.RGBA
+	static      bool
+}
+
+func (r *renderer) Static(s bool) {
+	if r != nil {
+		r.static = s
+		if !s && r.img != nil {
+			w := r.img.Bounds().Size().X
+			h := r.img.Bounds().Size().Y
+			for y := 0; y < h; y++ {
+				for x := 0; x < w; x++ {
+					r.img.Set(x, y, r.backColor)
+				}
+			}
+		}
+	}
 }
 
 func (r *renderer) getImage(w, h int) *image.RGBA {
@@ -41,6 +59,18 @@ func (r *renderer) getImage(w, h int) *image.RGBA {
 
 func (r *renderer) frame(w, h int) image.Image {
 	img := r.getImage(w, h)
+	if r.static {
+		for y := 0; y < h; y++ {
+			for x := 0; x < w; x++ {
+				c := r.color
+				if rand.Intn(2) == 1 {
+					c = r.backColor
+				}
+				img.Set(x, y, c)
+			}
+		}
+		return img
+	}
 	bx := int(float64(w) / float64(frameWidth))
 	by := int(float64(h) / float64(frameHeight))
 	for y := 0; y < frameHeight; y++ {
