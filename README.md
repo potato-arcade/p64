@@ -115,13 +115,13 @@ An Object can be :
 - An array of Numbers
 
 How to use the memory banks in code - store a value to a memory bank.
-```basic
+```Basic
 10 LET X = 10
 20 POKE 1, X
 ```
 
 How to use the memory banks in code - retrieve a value from a memory bank.
-```basic
+```Basic
 10 X = PEEK 1
 20 PRINT "The value of X is", X
 ```
@@ -177,7 +177,7 @@ This will dump the entire contents of the memory banks to the stdout, back on th
 The Video Controller is fixed frequency framebuffer device with a 4K capability.   (Thats 4K pixels in total)
 
 Machine instructions to write to the framebuffer, and manipulate pixel in the 64x64 grid.
-```basic
+```Basic
 REM Clear the framebuffer to the background color
 10 CLEAR
 
@@ -206,7 +206,7 @@ Writing code to be executed on VSYNC :
 - Use `POKE` to save state data back to the Memory Banks before exiting your VSYNC interrupt handler.
 
 Example code for a complete VSYNC interrupt handler :
-```basic
+```Basic
 .INTR VSYNC
 CLEAR
 LET X = PEEK 1
