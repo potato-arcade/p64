@@ -81,14 +81,14 @@ Because we are not trying to emulate any known machine, the definition of the P6
 
 ![bw](bw/bw8.jpg)
 
-### The CPU
+### The CPU, model P64-101
 
 The CPU is a single core machine that executes BASIC as its core instruction set, with some minor extensions.
 
 On power up, the machine runs its startup BIOS diagnostics, loads the conntents of the ROM Cartridge into the memory banks, 
 and then passes CPU control to run the code in Memory Bank 42
 
-### The ROM Cartridge Slot
+### The ROM Cartridge Slot, model RC64-110
 
 The machine boots off a ROM Cartridge, which must be inserted into the machine before power on.
 
@@ -102,7 +102,7 @@ sequentially until it hits the `END` statement.
 So the first block of code in the ROM Cartridge, up to the first `END` statement is used to setup the game state, and write these into the memory banks for later use.
 
 
-### The Memory Banks
+### The Memory Bank Controller, model MB-1492
 
 The machine has 64 "Memory Banks", which are addressed by the numbers 1 - 64.
 
@@ -114,6 +114,17 @@ An Object can be :
 - A Number
 - An array of Numbers
 
+How to use the memory banks in code - store a value to a memory bank.
+```
+10 LET X = 10
+20 POKE 1, X
+```
+
+How to use the memory banks in code - retrieve a value from a memory bank.
+```
+10 X = PEEK 1
+20 PRINT "The value of X is", X
+```
 
 Some of these Memory Banks are reserved for special purposes, but ALL of them are READ / WRITE !!
 
@@ -129,14 +140,17 @@ Video Memory Banks
 - 38 Background Color, string RGBA
 - 39 Border Color, string RGBA
 - 40 Video Control Register, a bitmask to control which of the framebuffers are displayed
-- 41 Hue Register 
-- 47 Image Effect Register
+- 41 Hue Modification Register 
+- 46 Refresh Rate Register, number, can be used to select the framebuffer refresh rate
+- 47 Image Effect Register, number, bitmask to select framebuffer post processing modes
 
 Code Memory Banks
 - 42 Boot Code. In this memory bank, you can find the complete BASIC code as loaded from the ROM Cartridge.
 - 43 VSYNC Code for the interrupt handler.
 - 44 KEYDOWN Code for the interrupt handler.
-- 45 VSYNC Code for the interrupt handler.
+- 45 KEYUP Code for the interrupt handler.
+
+... yes the code is user addressible, and user writable.  You could for example re-write the contents of the KEYDOWN handler inside some other code, if you really wanted to.
 
 Audio Registers
 - 48 The Audio Buffer, string,  being an array of Notes to be played in an endless loop.
@@ -144,17 +158,38 @@ Audio Registers
 - 50 Audio Sample Buffer, string,  being an array of Notes to be played once.
 - 51 Audio Control Register, number, a bitmask to control which audio channels are active.
 
-- 52 .. 60  Reserved for internal use
+- 52 .. 60  Not used
 
 - 61 1st Sprite Register, string, contains x,y location, bitmap and bitmask, collision detection bit for sprite 1
 - 62 2nd Sprite Register
 - 63 3rd Sprite Register
 - 64 4th Sprite Register
 
+### Video Controller, model EnVideon-4K/24
 
+The Video Controller is fixed frequency framebuffer device with a 4K capability.   (Thats 4K pixels in total)
 
+This model of video controller executes a framebuffer read at a rate of 24Hz (every 41ms or so), at which point it draws the current framebuffer onto the video output as an array of 64x64 dots.
 
-### Video Controller
+After that, it generates a VSYNC interrupt, which the CPU then picks up and uses to call the code to start building the next frame.M
+
+```
+Vertical Sync Interrupt (VSYNC)
+
+This interrupt is generated when the video controller has completed one clean pass of outputting a frame to the video output.
+```
+
+Video Memory Banks of interest.  (TODO - Work in progress, not available yet)
+- 33 The Video Framebuffer, being an array of 4096 Numbers, arranged consequetively as 1st Row, 2nd Row ... 64th Row. 
+- 34,35,36 - 2nd, 3rd, 4th Alternate Framebuffers 
+- 37 Foreground Color, string RGBA
+- 38 Background Color, string RGBA
+- 39 Border Color, string RGBA
+- 40 Video Control Register, a bitmask to control which of the framebuffers are displayed
+- 41 Hue Modification Register 
+- 46 Refresh Rate Register, number, can be used to select the framebuffer refresh rate
+- 47 Image Effect Register, number, bitmask to select framebuffer post processing modes
+
 ### The IO controller
 ### The Audio Controller
 
