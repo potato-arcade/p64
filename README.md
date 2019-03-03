@@ -87,7 +87,7 @@ Because we are not trying to emulate any known machine, the definition of the P6
 
 The CPU is a 64bit, single core machine that executes BASIC as its core instruction set, with some minor extensions.
 
-On power up, the machine runs its startup BIOS diagnostics, loads the conntents of the ROM Cartridge into the memory banks, 
+On power up, the machine runs its startup BIOS diagnostics, loads the contents of the ROM Cartridge into the memory banks, 
 and then passes CPU control to run the code from the first code Memory Bank.
 
 The `Escape` key is wired directly to the power switch - pressing it will perform a hard reboot of the machine to start the game again.
