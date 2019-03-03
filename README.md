@@ -83,11 +83,80 @@ Because we are not trying to emulate any known machine, the definition of the P6
 
 ### The CPU
 
+The CPU is a single core machine that executes BASIC as its core instruction set, with some minor extensions.
+
+On power up, the machine runs its startup BIOS diagnostics, loads the conntents of the ROM Cartridge into the memory banks, 
+and then passes CPU control to run the code in Memory Bank 42
+
 ### The ROM Cartridge Slot
+
+The machine boots off a ROM Cartridge, which must be inserted into the machine before power on.
+
+You do this when passing the filename of the ROM Cartridge to the `potato64` command on the command line.
+
+ie - `potato64 ROM/TENNIS.BAS` will insert the Tennis Cartridge into the machine on boot.
+
+This file must contain valid BASIC instructions.  Execution starts at the beginning of the file, and runs
+sequentially until it hits the `END` statement.
+
+So the first block of code in the ROM Cartridge, up to the first `END` statement is used to setup the game state, and write these into the memory banks for later use.
+
+
 ### The Memory Banks
+
+The machine has 64 "Memory Banks", which are addressed by the numbers 1 - 64.
+
+Each "Memory Bank" can be used to store 1 object, regardless of size. 
+
+An Object can be :
+
+- A String
+- A Number
+- An array of Numbers
+
+
+Some of these Memory Banks are reserved for special purposes, but ALL of them are READ / WRITE !!
+
+Reserved Memory Banks (TODO):
+
+User Memory Banks
+- 1 .. 32  User is free to use however they like.
+
+Video Memory Banks
+- 33 The Video Framebuffer, being an array of 4096 Numbers, arranged consequetively as 1st Row, 2nd Row ... 64th Row. 
+- 34,35,36 - 2nd, 3rd, 4th Alternate Framebuffers 
+- 37 Foreground Color, string RGBA
+- 38 Background Color, string RGBA
+- 39 Border Color, string RGBA
+- 40 Video Control Register, a bitmask to control which of the framebuffers are displayed
+- 41 Hue Register 
+- 47 Image Effect Register
+
+Code Memory Banks
+- 42 Boot Code. In this memory bank, you can find the complete BASIC code as loaded from the ROM Cartridge.
+- 43 VSYNC Code for the interrupt handler.
+- 44 KEYDOWN Code for the interrupt handler.
+- 45 VSYNC Code for the interrupt handler.
+
+Audio Registers
+- 48 The Audio Buffer, string,  being an array of Notes to be played in an endless loop.
+- 49 Secondary Audio Buffer, string,  being an array of Notes to be played in an endless loop.
+- 50 Audio Sample Buffer, string,  being an array of Notes to be played once.
+- 51 Audio Control Register, number, a bitmask to control which audio channels are active.
+
+- 52 .. 60  Reserved for internal use
+
+- 61 1st Sprite Register, string, contains x,y location, bitmap and bitmask, collision detection bit for sprite 1
+- 62 2nd Sprite Register
+- 63 3rd Sprite Register
+- 64 4th Sprite Register
+
+
+
+
 ### Video Controller
-- The IO controller
-- The Audio Controller
+### The IO controller
+### The Audio Controller
 
 ## ROM Cartridges
 
