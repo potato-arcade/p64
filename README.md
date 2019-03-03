@@ -246,14 +246,141 @@ Video Memory Banks of interest.  (TODO - Work in progress, not available yet)
 - 46 Refresh Rate Register, number, can be used to select the framebuffer refresh rate
 - 47 Image Effect Register, number, bitmask to select framebuffer post processing modes
 
-### The IO controller
-### The Audio Controller
+Future additional BASIC functions for graphics primitives (TODO)
 
-## ROM Cartridges
+```Basic
+REM Draw a Line
+10 LINE X1,Y1,X2,Y2
+
+REM Draw a Cirle
+20 CIRCLE X,Y,R
+
+REM Draw a Rect outline
+30 RECT X1,Y1,X2,Y2
+
+REM Draw a Filled Rectangle
+40 BOX X1,Y1,X2,Y2
+
+REM Flood Fill from a point till it hits a non-blank pixel
+50 FILL X,Y
+
+REM Blit Copy between framebuffers
+60 BLIT DSTFramebuffer, SRCFramebuffer
+
+REM Hue control of the whole palette, values 0-63
+70 HUE X
+
+REM Set color palette
+80 COLOR Foreground, Background, Border
+
+REM Framebuffer control
+90 SHOW Framebuffer,OnOff
+
+REM Effects control, Work in progress
+100 EFFECT ID,OnOff
+```
+
+See https://github.com/anthonynsimon/bild to get an idea of the effects overlays that the video controller (may) support
+
+### The IO controller, model P64-IC-1493
+
+The machine includes an IO controller that reads events from the keyboard, and generates interrupts on the IO bus.
+
+When a key is first pressed down, the IO Controller generates an interrupt immediately, and sets the reserved variable name `KEY` to the name of the key pressed.
+
+You can easily hook code up to these key events using the `KEYDOWN` and `KEYUP` interrupt handlers.
+
+eg - Some keyboard handlers to move a spaceship up and down. As the Up/Down key is pressed, it sets the "DeltaY" value and stores it in memory bank 1.  On KeyUp, the DeltaY value is cleared.
+
+On VSYNC, the spaceship vertical position is modified by DeltaY.
+
+So the overall effect is that as long as the key is held down, the spaceship will move in that direction at a constant rate of 1 dot @ 24Hz, regardless of how fast your host machine is. Nice !
+
+```Basic
+.INTR KEYDOWN
+10 DY = PEEK 1
+20 IF KEY = "Up" THEN DY = -1
+30 IF KEY = "Down" THEN DY = 1
+40 POKE 1, DY
+END
+
+.INTR KEYUP
+100 POKE 1, 0
+END
+
+.INTR VSYNC
+200 DY = PEEK 1
+210 X = PEEK 2
+220 Y = PEEK 3
+230 Y = Y + DY
+240 PRINT "Spaceship is now at", X,Y
+```
+
+Note the use of the special var `KEY` which is automatically set.
+
+For a complete list of Key event names, experiment by writing some code, and see what you get.
+
+```Basic
+.INTR KEYDOWN
+10 PRINT KEY,"\n"
+END
+```
+
+### The Audio Controller [Classified]
+
+The machine includes a hi-tech, quadrophonic music sythensizer chip ... that is so secret that the exact details are currently Classified.
+
+More info later as the audio device is revealed.
 
 ## Roll your own ROM
 
-![bw](bw/bw3.jpg =240x)
+Making your own ROM Cartridges is easy - just edit them offline in a good editor, and test them by running them in the virtual machine.
+
+While the documentation is pretty good, its still an exersize in discovery, and debugging errors can be frustrating at best.
+
+Persist, and see how you go.
+
+Use one of the existing ROM Cartridges as a base, copy it, change it, and observe what happens.
+
+Then ... fine tune your idea.
+
+## Bugs !
+
+The BASIC compiler is a bit buggy, sometimes.
+
+The use of `=` as a comparison operator sometimes gets confused as an assignment operator, and throws weird errors about "LET" commands that you dont have in the offending code.
+
+eg `IF X = 0 THEN PRINT "X is zero"`  doesnt always like the `=` in there.
+
+You can generally get around this by using line numbers on the offending code, and sometimes throwing in an empty `PRINT` as a nop that will mostly get the BASIC evaluation back on track, if you are lucky.
+
+Dont know :(
+
+Also - Resource thrashing !!
+
+Every 24Hz cycle, the machine instantiates a complete new BASIC environment, compiles the code, and executes the portion of code in the VSYNC handler.  This works well enough, but after a short enough while, the virtual machine starts to bog down excessively.
+
+I suspect this is due to large pauses of GC that need to clean up the mess that each dropped instance of BASIC leaves behind.
+
+Fix is to rewrite the BASIC compiler to have some resource caching and re-execution of existing code blocks when calling the same code over and over again.  Exersize for another day. Defs a job for a long weekend.
+
+Screen Scaling.
+
+You can re-size the screen, and the potato64 will rescale the output to fit the new dimensions.
+
+This puts quite a strain on the system though, because the virtual machine needs to render an image that fits the whole of the newly resized window.  Regardless of the fact that the underlying framebuffer is limited to 64x64, the scaling might mean that it needs to interpolate many millions of pixels.  Ouch !
+
+This will work, but it really eats into your 24Hz window to get each frame painted.
+
+Could address this by parallelizing some of the rendering code to make better use of multi-core machines, or use the underlying OpenGL hardware to do more work.  (Its possible to inject shaders into the graphics handling .. but thats defs another weekend project)
+
+A slightly better way of scaling the output is to set the `FYNE_SIZE` ENV Var to a larger number.
+
+eg : 
+`FYNE_SIZE=2 potato64 ROM/TENNIS.BAS` performs a bit better that simply dragging the window out to a bigger size.  Its still 4 times the load on the host machine though, so be mindful of that.
+
+
+![bw](bw/bw3.jpg)
 
 ## TODO
 
@@ -266,13 +393,6 @@ Video Memory Banks of interest.  (TODO - Work in progress, not available yet)
 - Text Mode
 
 - Colors !!  Colored border
-
-- Graphics primitives mapped to PotatoBASIC
-    - LINE x,y,x2,y2,style
-    - CIRCLE x,y,r
-    - TEXT x,y,string
-    - RECT x,y,x2,y2
-    - FILLBOX x,y,x2,y2
 
 - Sprites !
 
@@ -295,6 +415,8 @@ https://gitlab.com/rastersoft/fbzx
 https://github.com/remogatto/gospeccy
 
 https://github.com/ichikaway/goNES/
+
+https://github.com/anthonynsimon/bild
 
 
 ## Further reading - some vids you might like, to get you in the mood for P64 coding
