@@ -251,7 +251,7 @@ Video Memory Banks of interest [Classified]
 - 46 Refresh Rate Register, number, can be used to select the framebuffer refresh rate
 - 47 Image Effect Register, number, bitmask to select framebuffer post processing modes
 
-In the current release, access to these advanced hardware features are still classified, and locked down due to NDAs with powerful Government entities. Will open up these features as time, and our legal department permit.
+In the current release, access to these advanced hardware features are still classified, and locked down due to NDAs with powerful Government entities. Will open up these features as time, and our legal department permits.
 
 Future additional BASIC functions for graphics primitives (TODO)
 
