@@ -2,15 +2,17 @@
 
 Introducing the Potato-64 emulator, written in 100% Go
 
+A fyne app  http://fyne.io/fyne
+
 (with a bit of OpenGL C code under the hood)
 
-_Being something of a light hearted revolt against modern software development norms, web development, and the cult of the "FullStack" developer._
+_Being something of a light hearted revolt against modern coding norms, web development, and the cult of the "FullStack" developer._
+
+_This little toy is a weekend project to get back into the heart and soul of the machine._
 
 
-![potato](potato.jpg =240x)
+![potato](potato.jpg)
 
-A fyne app  
-http://fyne.io/fyne
 
 ## What is it, and why should I care ?
 
