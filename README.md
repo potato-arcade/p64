@@ -182,7 +182,7 @@ This will dump the entire contents of the memory banks to the stdout, back on th
 
 The Video Controller is fixed frequency framebuffer device with a 4K capability.   (Thats 4K pixels in total)
 
-Machine instructions to write to the framebuffer, and manipulate pixel in the 64x64 grid.
+Machine instructions to write to the framebuffer, and manipulate pixels in the 64x64 grid.
 ```Basic
 REM Clear the framebuffer to the background color
 10 CLEAR
