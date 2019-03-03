@@ -157,13 +157,15 @@ Code Memory Banks
 ... yes the code is user addressible, and user writable.  You could for example re-write the contents of the KEYDOWN handler inside some other code, if you really wanted to.
 
 Audio Registers
-- 48 The Audio Buffer, string,  being an array of Notes to be played in an endless loop.
-- 49 Secondary Audio Buffer, string,  being an array of Notes to be played in an endless loop.
-- 50 Audio Sample Buffer, string,  being an array of Notes to be played once.
-- 51 Audio Control Register, number, a bitmask to control which audio channels are active.
+- 48 The Audio Buffer, string, Notes to be played in an endless loop.
+- 49 Secondary Audio Buffer, string, Notes to be played in an endless loop.
+- 50 Audio Sample Buffer, string, Notes to be played once.
+- 51 Audio Mixer Register, number, bitmask of active channels.
 
+Free for later use
 - 52 .. 60  Not used
 
+Sprite Controllers [Classified] - not available yet
 - 61 1st Sprite Register, string, contains x,y location, bitmap and bitmask, collision detection bit for sprite 1
 - 62 2nd Sprite Register
 - 63 3rd Sprite Register
