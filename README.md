@@ -68,7 +68,7 @@ p64basic filename
 ```
 
 
-![bw](bw/bw7.jpg =240x)
+![bw](bw/bw7.jpg)
 
 ## The Machine
 
