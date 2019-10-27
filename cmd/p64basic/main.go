@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/skx/gobasic/builtin"
 	"io/ioutil"
 	"os"
 
@@ -88,7 +89,7 @@ func main() {
 	blankObj := &object.NumberObject{Value: 0.0}
 
 	// Register some builtins
-	e.RegisterBuiltin("PEEK", 1, func(env interface{}, args []object.Object) object.Object {
+	e.RegisterBuiltin("PEEK", 1, func(env builtin.Environment, args []object.Object) object.Object {
 		key := int(args[0].(*object.NumberObject).Value)
 		if key < 1 || key > 64 {
 			// invalid memory bank
@@ -104,7 +105,7 @@ func main() {
 		return value
 	})
 
-	e.RegisterBuiltin("POKE", 2, func(env interface{}, args []object.Object) object.Object {
+	e.RegisterBuiltin("POKE", 2, func(env builtin.Environment, args []object.Object) object.Object {
 		key := int(args[0].(*object.NumberObject).Value)
 		if key < 1 || key > 64 {
 			// invalid memory bank
@@ -115,25 +116,25 @@ func main() {
 		return blankObj
 	})
 
-	e.RegisterBuiltin("DEBUG", 0, func(env interface{}, args []object.Object) object.Object {
+	e.RegisterBuiltin("DEBUG", 0, func(env builtin.Environment, args []object.Object) object.Object {
 		fmt.Println("DEBUG Memory Banks")
 		spew.Dump(ram)
 		return blankObj
 	})
 
-	e.RegisterBuiltin("CLEAR", 0, func(env interface{}, args []object.Object) object.Object {
+	e.RegisterBuiltin("CLEAR", 0, func(env builtin.Environment, args []object.Object) object.Object {
 		fmt.Println("CLEAR")
 		return blankObj
 	})
 
-	e.RegisterBuiltin("AT", 2, func(env interface{}, args []object.Object) object.Object {
+	e.RegisterBuiltin("AT", 2, func(env builtin.Environment, args []object.Object) object.Object {
 		x := int(args[0].(*object.NumberObject).Value)
 		y := int(args[1].(*object.NumberObject).Value)
 		fmt.Printf("AT %v,%v -> %v\n", x, y, 0)
 		return blankObj
 	})
 
-	e.RegisterBuiltin("SET", 3, func(env interface{}, args []object.Object) object.Object {
+	e.RegisterBuiltin("SET", 3, func(env builtin.Environment, args []object.Object) object.Object {
 		x := int(args[0].(*object.NumberObject).Value)
 		y := int(args[1].(*object.NumberObject).Value)
 		v := int(args[2].(*object.NumberObject).Value)
@@ -141,7 +142,7 @@ func main() {
 		return blankObj
 	})
 
-	e.RegisterBuiltin("LINE", 4, func(env interface{}, args []object.Object) object.Object {
+	e.RegisterBuiltin("LINE", 4, func(env builtin.Environment, args []object.Object) object.Object {
 		x := int(args[0].(*object.NumberObject).Value)
 		y := int(args[1].(*object.NumberObject).Value)
 		x2 := int(args[2].(*object.NumberObject).Value)

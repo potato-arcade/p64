@@ -115,3 +115,7 @@ func (r *renderer) Refresh() {
 func (r *renderer) Objects() []fyne.CanvasObject {
 	return r.objects
 }
+
+func (r *renderer) Destroy() {
+
+}

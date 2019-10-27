@@ -2,6 +2,7 @@ package p64
 
 import (
 	"fmt"
+	"github.com/skx/gobasic/builtin"
 	"io/ioutil"
 	"strings"
 
@@ -15,7 +16,7 @@ func (p *P64) registerFunctions(e *eval.Interpreter) {
 
 	blankObj := &object.NumberObject{Value: 0.0}
 
-	e.RegisterBuiltin("PEEK", 1, func(env interface{}, args []object.Object) object.Object {
+	e.RegisterBuiltin("PEEK", 1, func(env builtin.Environment, args []object.Object) object.Object {
 		key := int(args[0].(*object.NumberObject).Value)
 		if key < 1 || key > 64 {
 			// invalid memory bank
@@ -28,7 +29,7 @@ func (p *P64) registerFunctions(e *eval.Interpreter) {
 		return value
 	})
 
-	e.RegisterBuiltin("POKE", 2, func(env interface{}, args []object.Object) object.Object {
+	e.RegisterBuiltin("POKE", 2, func(env builtin.Environment, args []object.Object) object.Object {
 		key := int(args[0].(*object.NumberObject).Value)
 		if key < 1 || key > 64 {
 			// invalid memory bank
@@ -40,12 +41,12 @@ func (p *P64) registerFunctions(e *eval.Interpreter) {
 		return blankObj
 	})
 
-	e.RegisterBuiltin("CLEAR", 0, func(env interface{}, args []object.Object) object.Object {
+	e.RegisterBuiltin("CLEAR", 0, func(env builtin.Environment, args []object.Object) object.Object {
 		p.frameBuffer.Clear()
 		return blankObj
 	})
 
-	e.RegisterBuiltin("SET", 3, func(env interface{}, args []object.Object) object.Object {
+	e.RegisterBuiltin("SET", 3, func(env builtin.Environment, args []object.Object) object.Object {
 		x := int(args[0].(*object.NumberObject).Value)
 		y := int(args[1].(*object.NumberObject).Value)
 		v := int(args[2].(*object.NumberObject).Value)
@@ -53,13 +54,13 @@ func (p *P64) registerFunctions(e *eval.Interpreter) {
 		return blankObj
 	})
 
-	e.RegisterBuiltin("AT", 2, func(env interface{}, args []object.Object) object.Object {
+	e.RegisterBuiltin("AT", 2, func(env builtin.Environment, args []object.Object) object.Object {
 		x := int(args[0].(*object.NumberObject).Value)
 		y := int(args[1].(*object.NumberObject).Value)
 		return &object.NumberObject{Value: float64(p.frameBuffer.At(x, y))}
 	})
 
-	e.RegisterBuiltin("LINE", 4, func(env interface{}, args []object.Object) object.Object {
+	e.RegisterBuiltin("LINE", 4, func(env builtin.Environment, args []object.Object) object.Object {
 		x := int(args[0].(*object.NumberObject).Value)
 		y := int(args[1].(*object.NumberObject).Value)
 		x2 := int(args[2].(*object.NumberObject).Value)
@@ -68,7 +69,7 @@ func (p *P64) registerFunctions(e *eval.Interpreter) {
 		return blankObj
 	})
 
-	e.RegisterBuiltin("DEBUG", 0, func(env interface{}, args []object.Object) object.Object {
+	e.RegisterBuiltin("DEBUG", 0, func(env builtin.Environment, args []object.Object) object.Object {
 		fmt.Println("DEBUG Memory Banks")
 		spew.Dump(env)
 		spew.Dump(p.ram)

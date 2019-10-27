@@ -76,3 +76,31 @@ func (p64Theme) IconInlineSize() int {
 func (p64Theme) ScrollBarSize() int {
 	return 10
 }
+
+func (p64Theme) DisabledButtonColor() color.Color {
+	return color.White
+}
+
+func (p64Theme) DisabledIconColor() color.Color {
+	return color.White
+}
+
+func (p64Theme) DisabledTextColor() color.Color {
+	return color.White
+}
+
+func (p64Theme) HoverColor() color.Color {
+	return color.White
+}
+
+func (p64Theme) IconColor() color.Color {
+	return color.White
+}
+
+func (p64Theme) ShadowColor() color.Color {
+	return color.White
+}
+
+func (p64Theme) ScrollBarSmallSize() int {
+	return 10
+}
