@@ -28,7 +28,7 @@ func (p *P64) MinSize() fyne.Size {
 }
 
 func (p *P64) Visible() bool {
-	return p.hidden
+	return !p.hidden
 }
 
 func (p *P64) Show() {
